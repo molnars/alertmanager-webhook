@@ -2,6 +2,8 @@ package main
 
 import (
      "net/http"
+     "fmt"
+     "log"
   }
 
 func webhook(w http.ResponseWriter, r *http.Request) {
@@ -11,9 +13,9 @@ func webhook(w http.ResponseWriter, r *http.Request) {
     asJson(w, http.StatusBadRequest, err.Error())
     return
   }
-  log.Printf("Alerts: GroupLabels=%v, CommonLabels=%v", data.GroupLabels, data.CommonLabels)
+  fmt.Printf("Alerts: GroupLabels=%v, CommonLabels=%v", data.GroupLabels, data.CommonLabels)
   for _, alert := range data.Alerts {
-    log.Printf("Alert: status=%s,Labels=%v,Annotations=%v", alert.Status, alert.Labels, alert.Annotations)
+    fmt.Printf("Alert: status=%s,Labels=%v,Annotations=%v", alert.Status, alert.Labels, alert.Annotations)
   
   severity := alert.Labels["severity"]
   switch strings.ToUpper(severity) {
@@ -35,6 +37,6 @@ func main() {
  if os.Getenv("PORT") != "" {
   listenAddress = ":" + os.Getenv("PORT")
  }
- log.Printf("listening on: %v", listenAddress)
+ fmt.Printf("listening on: %v", listenAddress)
  log.Fatal(http.ListenAndServe(listenAddress, nil))
 }
