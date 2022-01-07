@@ -2,8 +2,10 @@ package main
 
 import (
      "net/http"
+     "strings"
      "fmt"
      "log"
+     "os"
   }
 
 func webhook(w http.ResponseWriter, r *http.Request) {
