@@ -1,7 +1,7 @@
 package main
 
 import (
-     "http"
+     "net/http"
   }
 
 func webhook(w http.ResponseWriter, r *http.Request) {
